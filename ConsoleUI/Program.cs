@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
+            CarTest();
 
             //BrandTest();
 
@@ -31,7 +31,7 @@ namespace ConsoleUI
             colorManager.Delete(color3);
 
 
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
             }
@@ -46,7 +46,7 @@ namespace ConsoleUI
             Brand brand2 = new Brand { BrandId = 2, BrandName = "Mercedes Benz" };
             Brand brand3 = new Brand { BrandId = 5 };
 
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
             }
@@ -57,22 +57,33 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
-            {
-                Console.WriteLine(car.CarName + " " + car.BrandName);
-            }
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.CarName);
-            }
-            Car car1 = new Car { ColorId = 2, BrandId = 2, CarName = "AMG", ModelYear = 2000, DailyPrice = 250, Description = "C Serisi" };
-            Car car2 = new Car { ColorId = 2, BrandId = 3, CarName = "Polo", ModelYear = 2016, DailyPrice = 250, Description = "Full Set" };
-            Car car3 = new Car { CarId = 2 };
 
-            carManager.Add(car1);
-            carManager.Add(car2);
-            carManager.Delete(car3);
-            carManager.Update(car2);
+            var result = carManager.GetCarDetails();
+            if (result.Success)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " " + car.BrandName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+            
+            //foreach (var car in carManager.GetAll())
+            //{
+            //    Console.WriteLine(car.CarName);
+            //}
+            //Car car1 = new Car { ColorId = 2, BrandId = 2, CarName = "AMG", ModelYear = 2000, DailyPrice = 250, Description = "C Serisi" };
+            //Car car2 = new Car { ColorId = 2, BrandId = 3, CarName = "Polo", ModelYear = 2016, DailyPrice = 250, Description = "Full Set" };
+            //Car car3 = new Car { CarId = 2 };
+
+            //carManager.Add(car1);
+            //carManager.Add(car2);
+            //carManager.Delete(car3);
+            //carManager.Update(car2);
         }
     }
 }
