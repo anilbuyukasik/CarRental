@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  CustomerId = c.CustomerId,
                                  CompanyName = c.CompanyName,
-                                 FirstName = u.Firstname,
+                                 FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  Email = u.Email,
                                  Password = u.Password

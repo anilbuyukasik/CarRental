@@ -27,7 +27,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandName = b.BrandName,
                                  ColorName = co.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 FirstName = u.Firstname,
+                                 FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate
