@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
@@ -26,17 +27,17 @@ namespace Business.Concrete
             {
                 if (car.ReturnDate == null)
                 {
-                    return new ErrorResult("Araba başka müşteride!");
+                    return new ErrorResult(Messages.CarAlreadyRented);
                 }
             }
             _rentalDal.Add(rental);
-            return new SuccessResult("Başarıyla kiralandı");
+            return new SuccessResult(Messages.CarRented);
         }
 
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentDeleted);
         }
 
         public IDataResult<List<Rental>> GetAll()
@@ -67,7 +68,7 @@ namespace Business.Concrete
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
-            return new SuccessResult();
+            return new SuccessResult(Messages.RentUpdated);
         }
     }
 }

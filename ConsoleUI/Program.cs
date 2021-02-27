@@ -60,14 +60,14 @@ namespace ConsoleUI
         private static void UserTest()
         {
             UserManager userManager = new UserManager(new EfUserDal());
-            User user1 = new User { Firstname = "Anıl", LastName = "Büyükaşık", Email = "buyukasik.anil@gmail.com", Password = "123456" };
-            User user2 = new User { Firstname = "Engin", LastName = "Demiroğ", Email = "engindemirog@gmail.com", Password = "654321" };
+            User user1 = new User { FirstName = "Anıl", LastName = "Büyükaşık", Email = "buyukasik.anil@gmail.com", Password = "123456" };
+            User user2 = new User { FirstName = "Engin", LastName = "Demiroğ", Email = "engindemirog@gmail.com", Password = "654321" };
 
             userManager.Add(user1);
             userManager.Add(user2);
             foreach (var user in userManager.GetAll().Data)
             {
-                Console.WriteLine(user.Firstname + " " + user.LastName);
+                Console.WriteLine(user.FirstName + " " + user.LastName);
             }
         }
 
@@ -108,7 +108,7 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
+            CarManager carManager = new CarManager(new EfCarDal(),new BrandManager(new EfBrandDal()));
 
             var result = carManager.GetCarDetails();
             if (result.Success)
