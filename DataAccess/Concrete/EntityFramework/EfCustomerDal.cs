@@ -16,7 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (CarRentalContext context = new CarRentalContext())
             {
                 var result = from c in context.Customers
-                             join u in context.Users on c.UserId equals u.UserId
+                             join u in context.Users on c.UserId equals u.Id
                              select new CustomerDetailDto
                              {
                                  CustomerId = c.CustomerId,
@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  Email = u.Email,
-                                 Password = u.Password
+                                 Password = u.PasswordHash
                              };
                 return result.ToList();
 
