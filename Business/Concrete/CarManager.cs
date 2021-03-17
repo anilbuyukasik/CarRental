@@ -81,13 +81,13 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
-        [CacheAspect(duration: 10)]
+        //[CacheAspect(duration: 10)]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 21)
-            {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 21)
+            //{
+            //    return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
         [ValidationAspect(typeof(CarValidator))]
