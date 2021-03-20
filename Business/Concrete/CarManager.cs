@@ -50,9 +50,9 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
-        [CacheAspect(duration:10)]
-        [PerformanceAspect(5)]
-        [LogAspect(typeof(FileLogger))]
+        //[CacheAspect(duration:10)]
+        //[PerformanceAspect(5)]
+        //[LogAspect(typeof(FileLogger))]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 1)
@@ -66,7 +66,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
-        [CacheAspect(duration: 10)]
+        //[CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAllByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
@@ -123,6 +123,16 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarNameAlreadyExists);
             }
             return new SuccessResult();
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailByColorId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByColorId(id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailByBrandId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByBrandId(id));
         }
     }
 }
