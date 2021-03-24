@@ -25,7 +25,7 @@ namespace Business.Concrete
             var rentedCarList = _rentalDal.GetAll(r => r.CarId == rental.CarId);
             foreach (var car in rentedCarList)
             {
-                if (car.ReturnDate == null)
+                if (car.ReturnDate <= DateTime.Now)
                 {
                     return new ErrorResult(Messages.CarAlreadyRented);
                 }

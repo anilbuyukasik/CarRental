@@ -117,7 +117,7 @@ namespace Business.Concrete
         }
         private IResult CheckIfCarNameExists(string carName)
         {
-            var result = _carDal.GetAll(c=>c.CarName == carName).Any();
+            var result = _carDal.GetAll(c => c.CarName == carName).Any();
             if (result)
             {
                 return new ErrorResult(Messages.CarNameAlreadyExists);
@@ -127,12 +127,12 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetailByColorId(int id)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByColorId(id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == id));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailByBrandId(int id)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailByBrandId(id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == id));
         }
     }
 }
