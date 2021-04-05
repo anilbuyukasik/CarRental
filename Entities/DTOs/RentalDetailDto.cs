@@ -16,5 +16,6 @@ namespace Entities.DTOs
         public string LastName { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime? ReturnDate { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

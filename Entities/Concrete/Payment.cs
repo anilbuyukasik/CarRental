@@ -9,7 +9,7 @@ namespace Entities.Concrete
     {
         public int PaymentId { get; set; }
         public int RentalId { get; set; }
-        public string CardOwnerName { get; set; }
+        public string CardHolderName { get; set; }
         public string CardNo { get; set; }
         public string ExpirationDate { get; set; }
         public string Cvc { get; set; }
