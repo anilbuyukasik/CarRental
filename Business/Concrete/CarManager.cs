@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -30,7 +31,7 @@ namespace Business.Concrete
             _carDal = carDal;
             _brandService = brandService;
         }
-
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Car car)
@@ -50,9 +51,8 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
-        //[CacheAspect(duration:10)]
-        //[PerformanceAspect(5)]
-        //[LogAspect(typeof(FileLogger))]
+        [CacheAspect(duration:10)]
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 1)
@@ -66,7 +66,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
-        //[CacheAspect(duration: 10)]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAllByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
@@ -81,7 +81,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
-        //[CacheAspect(duration: 10)]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             //if (DateTime.Now.Hour == 21)
